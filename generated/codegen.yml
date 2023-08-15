@@ -1,0 +1,8 @@
+schema: ./generated/schemas/schema.graphql
+documents: ./src/schemas/queries/*.graphql
+generates:
+    ./generated/sdk/ever-api-sdk.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - typed-document-node

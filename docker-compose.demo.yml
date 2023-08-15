@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+    nginx:
+        image: nginx:latest
+        container_name: production_nginx
+        volumes:
+            - .deploy/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - .deploy/nginx/log/:/etc/nginx/logs
+            - .deploy/nginx/cache/:/etc/nginx/cache
+            - /etc/letsencrypt/:/etc/letsencrypt/
+        ports:
+            - '8080:8080'
+        depends_on:
+            - api
+        links:
+            - api:${API_HOST:-api}
+        networks:
+            - overlay
+
+    db:
+        image: postgres:15-alpine
+        container_name: db
+        restart: always
+        environment:
+            POSTGRES_DB: ${DB_NAME:-ever_api_starter_kit}
+            POSTGRES_USER: ${DB_USER:-postgres}
+            POSTGRES_PASSWORD: ${DB_PASS:-ever_password}
+        healthcheck:
+            test:
+                [
+                    'CMD-SHELL',
+                    'psql postgres://$${POSTGRES_USER}:$${POSTGRES_PASSWORD}@localhost:5432/$${POSTGRES_DB} || exit 1',
+                ]
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+            - ./.deploy/db/init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+        ports:
+            - '5432:5432'
+        networks:
+            - overlay
+
+    pgweb:
+        image: sosedoff/pgweb
+        container_name: pgweb
+        restart: always
+        depends_on:
+            - db
+        links:
+            - db:${DB_HOST:-db}
+        environment:
+            POSTGRES_DB: ${DB_NAME:-ever_api_starter_kit}
+            POSTGRES_USER: ${DB_USER:-postgres}
+            POSTGRES_PASSWORD: ${DB_PASS:-ever_password}
+            DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASS:-ever_password}@${DB_HOST:-db}:${DB_PORT:-5432}/${DB_NAME:-ever_api_starter_kit}?sslmode=disable
+        ports:
+            - '8081:8081'
+        networks:
+            - overlay
+
+    redis:
+        image: 'redis:7.0.2-alpine'
+        container_name: redis
+        restart: always
+        ports:
+            - '6379'
+        networks:
+            - overlay
+
+    api:
+        container_name: api
+        image: docker.pkg.github.com/ever-co/ever-api-starter-kit/ever-api-starter-kit-api:latest
+        environment:
+            NODE_ENV: ${NODE_ENV:-development}
+            DB_HOST: db
+            SENTRY_DSN: ${SENTRY_DSN:-}
+            IS_NOT_SLS: 'true'
+        env_file:
+            - .env.compose
+        entrypoint: './entrypoint.compose.sh'
+        command: ['node', 'main.js']
+        restart: on-failure
+        depends_on:
+            db:
+                condition: service_healthy
+            redis:
+                condition: service_started
+        links:
+            db:
+                condition: service_healthy
+        # volumes:
+        #  - api_node_modules:/srv/ever-api-starter-kit/node_modules
+        ports:
+            - '3005:${API_PORT:-3005}'
+        networks:
+            - overlay
+
+volumes:
+    # api_node_modules:
+    postgres_data: {}
+    certificates: {}
+
+networks:
+    overlay:
+        driver: bridge

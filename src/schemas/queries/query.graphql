@@ -1,0 +1,44 @@
+query employee {
+	employees {
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+			startCursor
+			endCursor
+		}
+		edges {
+			node {
+				id
+				firstName
+				lastName
+			}
+		}
+	}
+}
+
+query employeeByName($firstNameFilter: String!, $lastNameFilter: String!) {
+	employees(
+		filter: {
+			firstName: { eq: $firstNameFilter }
+			lastName: { eq: $lastNameFilter }
+		}
+	) {
+		edges {
+			node {
+				id
+				firstName
+				lastName
+			}
+		}
+		totalCount
+	}
+}
+
+mutation updateOneEmployee($input: UpdateOneEmployeeInput!) {
+	updateOneEmployee(input: $input) {
+		isActive
+		isArchived
+		firstName
+		lastName
+	}
+}

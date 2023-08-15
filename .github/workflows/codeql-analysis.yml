@@ -1,0 +1,44 @@
+name: 'CodeQL'
+
+on:
+    push:
+        branches: [develop]
+    pull_request:
+        # The branches below must be a subset of the branches above
+        branches: [develop]
+
+concurrency:
+    group: ${{ github.ref }}-${{ github.workflow }}
+    cancel-in-progress: true
+
+jobs:
+    analyze:
+        name: Analyze
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                language: ['javascript']
+
+        permissions:
+            security-events: write
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Initialize CodeQL
+              uses: github/codeql-action/init@v2
+              with:
+                  languages: ${{ matrix.language }}
+
+            - name: Autobuild
+              uses: github/codeql-action/autobuild@v2
+
+            #- run: |
+            #   make bootstrap
+            #   make release
+
+            - name: Perform CodeQL Analysis
+              uses: github/codeql-action/analyze@v2

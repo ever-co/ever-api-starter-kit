@@ -1,0 +1,74 @@
+service: ever-api-starter-kit
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    region: ${opt:region, 'us-east-1'}
+    stage: ${opt:stage,'local'}
+
+    # Environment Variables
+    environment:
+        DB_HOST: ${self:custom.postgresHost.${self:provider.stage}}
+        DB_USER: ${self:custom.postgresUser.${self:provider.stage}}
+        DB_PASS: ${self:custom.postgresPassword.${self:provider.stage}}
+        DB_NAME: ${self:custom.postgresDatabase.${self:provider.stage}}
+        DB_PORT: ${self:custom.postgresPort.${self:provider.stage}}
+        SERVICE: ${self:service}
+        STAGE: ${self:provider.stage}
+        REGION: ${self:provider.region}
+        NO_COLOR: ${env:NO_COLOR, 'true'}
+
+plugins:
+    - serverless-plugin-typescript
+    - serverless-plugin-optimize
+    - serverless-offline
+    - serverless-plugin-warmup
+
+package:
+    individually: true
+    exclude:
+        - .git/**
+        - src/**
+        - test/**
+        - e2e/**
+        - nodemon.json
+        - README.md
+
+custom:
+    stages:
+        - local
+        - dev
+        - prod
+        - stage
+
+    postgresHost:
+        local: localhost
+    postgresUser:
+        local: postgres
+    postgresPassword:
+        local: root
+    postgresDatabase:
+        local: ever_api_starter_kit
+    postgresPort:
+        local: '5432'
+
+    # Enable warmup on all functions (only for production and staging)
+    warmup:
+        - prod
+        - stage
+
+    serverless-offline:
+        httpPort: 3005
+
+functions:
+    index:
+        handler: src/index.handler
+        events:
+            - http:
+                  cors: true
+                  path: '/'
+                  method: any
+            - http:
+                  cors: true
+                  path: '{proxy+}'
+                  method: any
