@@ -1,17 +1,18 @@
 # CREDITS
 
-This application code mostly is a mix of third-party frameworks / libraries / components, configured to work well together (see details about all those below). It follows standard conventions for most of large NestJs based projects.
+This application code mostly is a mix of third-party frameworks/libraries/components, configured to work well together (see details about all those below). It follows standard conventions for most large NestJs-based projects.  
 
-We used exactly same Stack (TS, NestJs, GraphQL/REST) in our company Open-Source projects (<https://github.com/ever-co/ever-gauzy>, <https://github.com/ever-co/ever-demand>, and many others) as well as our internal proprietary closed-source projects (e.g. <https://github.com/ever-co/ever-gauzy-ai>) for many years. We have build numerous commercial projects with exactly the same software Stack and we love it!
-Essentially, all credit belong to those libraries listed below and 100s of other packages from [package.json](package.json) file!
-So, you will not find any "unique" code in this repo, more just a "standard" way to use all those things together!
+We used exactly the same Stack (TS, NestJs, GraphQL/REST) in our company Open-Source projects (<https://github.com/ever-co/ever-gauzy>, <https://github.com/ever-co/ever-demand>, and many others) as well as our internal proprietary closed-source projects (e.g. <https://github.com/ever-co/ever-gauzy-ai>) for many years. We have also built numerous commercial projects with exactly the same software Stack and we love it!  
+
+Essentially, all credit belongs to those libraries listed below and 100s of other packages from [package.json](package.json) file!  
+So, you will not find any "unique" code in this repo, more just a "standard" way to use all those things together.
 
 ## Components, Libraries, Frameworks, Packages
 
 This application uses Open Source components and 3rd party libraries, which are licensed under their own respective Open-Source licenses.
-You can find the links to source code of their open source projects along with license information below.
+You can find the links to the source code of their open-source projects along with license information below.
 We acknowledge and are grateful to these developers for their contributions to open source.
-Please see [package.json](package.json) for full large list of packages we used, but also review our favorites below:
+Please see [package.json](package.json) for a full large list of packages we used, but also review our favorites below:
 
 -   [ngx-starter-kit](https://github.com/xmlking/ngx-starter-kit), Ngx Starter Kit, released under [MIT](https://github.com/xmlking/ngx-starter-kit/blob/develop/LICENSE), `Copyright (c) 2018 Sumanth Chinthagunta`
 
