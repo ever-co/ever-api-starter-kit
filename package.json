@@ -70,7 +70,7 @@
 		"@ptc-org/nestjs-query-core": "^4.0.0",
 		"@ptc-org/nestjs-query-graphql": "^4.0.0",
 		"@ptc-org/nestjs-query-typeorm": "^4.0.0",
-		"graphql": "^16.7.1",
+		"graphql": "^16.8.1",
 		"graphql-tools": "^9.0.0",
 		"graphql-relay": "^0.10.0",
 		"graphql-subscriptions": "^2.0.0",
