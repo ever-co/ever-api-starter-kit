@@ -6,12 +6,12 @@
 
 ## 🧱 Technology Stack
 
--   NestJs / CQRS
--   GraphQL & REST APIs
--   TypeORM
--   PostgreSQL / SQLite / sqljs
--   Docker / Kubernetes
--   [Supertokens Auth](https://github.com/supertokens/supertokens-core)
+-   [NestJs](https://nestjs.com) / [CQRS](https://docs.nestjs.com/recipes/cqrs).
+-   GraphQL & REST APIs.
+-   [TypeORM](https://typeorm.io).
+-   [PostgreSQL](https://www.postgresql.org) / [SQLite](https://www.sqlite.org) / [SQL.js](https://github.com/sql-js/sql.js).
+-   Docker / Kubernetes.
+-   [Supertokens Auth](https://github.com/supertokens/supertokens-core).
 
 ## 🚀 Quick Start
 
@@ -96,7 +96,7 @@ See more details in the [LICENSE](LICENSE).
 
 In a production setup, all client-side to server-side (backend, APIs) communications should be encrypted using HTTPS/WSS/SSL (REST APIs, GraphQL endpoint, Socket.io WebSockets, etc.).
 
-If you discover any issue regarding security, please disclose the information responsibly by sending an email to <mailto:security@ever.co> or on [![huntr](https://cdn.huntr.dev/huntr_security_badge_mono.svg)](https://huntr.dev) and not by creating a GitHub issue.
+If you discover any issue regarding security, please disclose the information responsibly by sending an email to <mailto:security@ever.co> and not by creating a GitHub issue.
 
 ## 🛡️ License
 
@@ -105,7 +105,7 @@ If you discover any issue regarding security, please disclose the information re
 ## ™️ Trademarks
 
 **Ever**® is a registered trademark of [Ever Co. LTD](https://ever.co).
-**Ever® API Starter Kit™**, **Ever® Demand™**, **Ever® Teams™**, **Ever® Gauzy™**, **Ever® Gauzy AI™**, **Ever® OpenSaaS™** are all trademarks of [Ever Co. LTD](https://ever.co).
+**Ever® API Starter Kit™**, **Ever® Web App Starter Kit™**, **Ever® Demand™**, **Ever® Teams™**, **Ever® Gauzy™**, **Ever® Gauzy AI™**, **Ever® OpenSaaS™** are all trademarks of [Ever Co. LTD](https://ever.co).
 
 The trademarks may only be used with the written permission of Ever Co. LTD. and may not be used to promote or otherwise market competitive products or services.
 
