@@ -2,7 +2,7 @@
 
 ## 🌟 What is it
 
-[Ever® API Starter Kit™](https://ever.dev) - Open-Source Starter Kit / Boilerplate for Multi-Tenant APIs
+[Ever® API Starter Kit™](https://ever.dev) - Open-Source Starter Kit / Boilerplate for Multi-Tenant / SaaS APIs
 
 ## 🧱 Technology Stack
 
