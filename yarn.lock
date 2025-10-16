@@ -2105,33 +2105,33 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@dataui/crud-request@^5.3.1-alpha.3":
-  version "5.3.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@dataui/crud-request/-/crud-request-5.3.1-alpha.3.tgz#3d011bac16f5e9d75418073e5e845876945d6e3f"
-  integrity sha512-OorABX564n8hV7Zhe7y9GDUj8qzn5l65uvM+FQ6oDl5egBIQoEOCR3NKX6LosGuaient50YvTPzwxRRtgHh1bg==
+"@dataui/crud-request@^5.3.4":
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/@dataui/crud-request/-/crud-request-5.3.4.tgz#9bc4913f10683667ac32ad2cc4ca1c27e08f1913"
+  integrity sha512-Q8hvGQppeWtKZdCe6h414M7jgvuX4cNplnQRlWCCR4rOnSYjWcQV5aJlbEaSC3oNCzb5WZJs7SSf7fF/JV9KMA==
   dependencies:
-    "@dataui/crud-util" "^5.3.1-alpha.3"
+    "@dataui/crud-util" "^5.3.4"
     qs "^6.8.0"
 
-"@dataui/crud-typeorm @^5.3.1-alpha.3":
-  version "5.3.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@dataui/crud-typeorm/-/crud-typeorm-5.3.1-alpha.3.tgz#d2b17ab5369cc3aa7d2f273600afecb92c5be449"
-  integrity sha512-HJu0/jJ/XZtnLYALL6miJLtk5KiGPClNvmxvcVMlxMjqS6mIeXLaoUE0hKQpI+QGddkV9edJj/6kzK1tjC44Ng==
+"@dataui/crud-typeorm@^5.3.4":
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/@dataui/crud-typeorm/-/crud-typeorm-5.3.4.tgz#f40580ef37433801f0bfba3c5bd2812d7c12c772"
+  integrity sha512-rFIop8t2K/Y4YuifjWbuiSybAm+4s8jSlcGkn/f2Q2GmPKGt0xDkg56UBJ9m0kvqejYtT4lUcUz4d5cG6/RgpA==
   dependencies:
     "@zmotivat0r/o0" "^1.0.2"
 
-"@dataui/crud-util@^5.3.1-alpha.3":
-  version "5.3.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@dataui/crud-util/-/crud-util-5.3.1-alpha.3.tgz#2b038a0cc7d073201b3d6ec1e553e03347b7eeb5"
-  integrity sha512-cRZp93FyvYE8Hpk/HWv4LC5GvEKqs+YHAjNhKJq7kCk541c3gGET9mpnkRzYkUZWpKQWSnl7WatzyTYoEaYR3g==
+"@dataui/crud-util@^5.3.4":
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/@dataui/crud-util/-/crud-util-5.3.4.tgz#d4bd10070525b6ee43136bb6b6f6139208e6cfcd"
+  integrity sha512-NAJ/KQshpttB/k8V72tpOIcfgZ/KINivfLq5T3Wyy7BKU6cARYzuE4gHSWjSM5WcyavHr9tBaodTAoNd7j+KiA==
 
-"@dataui/crud@^5.3.1-alpha.3":
-  version "5.3.1-alpha.3"
-  resolved "https://registry.yarnpkg.com/@dataui/crud/-/crud-5.3.1-alpha.3.tgz#5dbdd0ae661d6b07dc582678b702f73b242f57b9"
-  integrity sha512-i0BeUkDw3hIrnyQEmQUI7iQjtnAluyqsxXf6HPF0Z+X5iOSk2aW62NgSQOCQ59t8+kmPGPESmd5gjS5znEbsYQ==
+"@dataui/crud@^5.3.4":
+  version "5.3.4"
+  resolved "https://registry.yarnpkg.com/@dataui/crud/-/crud-5.3.4.tgz#77af05e9c292fb986745d8d81b1b30f9a310e2c9"
+  integrity sha512-Klw0/fiBvbuZoswPbfhlNhfwDizIhg1WgSxD/rlZ9E08e+L5iU/KwgIHQsP+kKhv0nF+z6H97XLgzrJRGcuhnA==
   dependencies:
-    "@dataui/crud-request" "^5.3.1-alpha.3"
-    "@dataui/crud-util" "^5.3.1-alpha.3"
+    "@dataui/crud-request" "^5.3.4"
+    "@dataui/crud-util" "^5.3.4"
     deepmerge "^3.2.0"
     pluralize "^8.0.0"
 
