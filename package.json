@@ -50,9 +50,9 @@
 		"sls:start": "cross-env IS_NOT_SLS= yarn sls offline start",
 		"sls:online": "cross-env IS_NOT_SLS= cross-env IS_DDB_LOCAL= yarn sls offline",
 		"migration:create": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:create src/migrations/migration -t",
-        "migration:generate": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:generate src/migrations/migration -d ./src/orm-config.ts",
-        "migration:run": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:run -d ./src/orm-config.ts",
-        "migration:rollback": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:revert -d ./src/orm-config.ts"
+		"migration:generate": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:generate src/migrations/migration -d ./src/orm-config.ts",
+		"migration:run": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:run -d ./src/orm-config.ts",
+		"migration:rollback": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:revert -d ./src/orm-config.ts"
 	},
 	"dependencies": {
 		"@godaddy/terminus": "^4.12.1",
@@ -148,9 +148,9 @@
 		"eslint": "^8.36.0",
 		"eslint-config-airbnb-typescript": "^17.0.0",
 		"eslint-config-prettier": "^8.7.0",
-		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-jsdoc": "^40.0.3",
-		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-import": "^2.32.0 ",
+		"eslint-plugin-jsdoc": "^61.1.4",
+		"eslint-plugin-prettier": "^5.5.4",
 		"husky": "^8.0.3",
 		"jest": "^29.5.0",
 		"js-yaml": "^4.1.0",
@@ -238,7 +238,7 @@
 	},
 	"engines": {
 		"node": ">=20.0.0",
-        "yarn": ">=1.13.0"
+		"yarn": ">=1.13.0"
 	},
 	"snyk": true
 }
