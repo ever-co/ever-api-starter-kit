@@ -28,6 +28,16 @@ jobs:
             - name: Save DigitalOcean kubeconfig with short-lived credentials
               run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 k8s-ever
 
+            - name: Generate TLS Secrets
+              run: |
+                  rm -f ${HOME}/ingress.api.crt ${HOME}/ingress.api.key ${HOME}/ingress.auth.crt ${HOME}/ingress.auth.key
+                  echo "${{ secrets.INGRESS_CERT }}" | base64 --decode > ${HOME}/ingress.api.crt
+                  echo "${{ secrets.INGRESS_CERT_KEY }}" | base64 --decode > ${HOME}/ingress.api.key
+                  echo "${{ secrets.INGRESS_CERT }}" | base64 --decode > ${HOME}/ingress.auth.crt
+                  echo "${{ secrets.INGRESS_CERT_KEY }}" | base64 --decode > ${HOME}/ingress.auth.key
+                  kubectl create secret tls apistarterkit.ever.dev-tls --save-config --dry-run=client --cert=${HOME}/ingress.api.crt --key=${HOME}/ingress.api.key -o yaml | kubectl --context do-sfo2-k8s-ever apply -f -
+                  kubectl create secret tls authstarterkit.ever.dev-tls --save-config --dry-run=client --cert=${HOME}/ingress.auth.crt --key=${HOME}/ingress.auth.key -o yaml | kubectl --context do-sfo2-k8s-ever apply -f -
+
             - name: Write PostgreSQL Certificate file
               run: |
                   echo "$DB_CA_CERT" | base64 --decode > ${HOME}/ca-certificate.crt
@@ -84,3 +94,4 @@ jobs:
             - name: Restart Pods to pick up :latest tag version
               run: |
                   kubectl --context do-sfo2-k8s-ever rollout restart deployment/ever-api-starter-kit-prod-api
+                  kubectl --context do-sfo2-k8s-ever rollout restart deployment/ever-api-starter-kit-prod-auth
