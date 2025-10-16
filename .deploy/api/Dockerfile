@@ -44,7 +44,7 @@ ARG PM2_SECRET_KEY
 ARG PM2_MACHINE_NAME
 ARG IS_DISABLE_AUTH
 
-FROM node:18-alpine3.16 AS dependencies
+FROM node:20.17.0-alpine3.19 AS dependencies
 
 LABEL maintainer="ever@ever.co"
 LABEL org.opencontainers.image.source https://github.com/ever-co/ever-ever-api-starter-kit
@@ -54,11 +54,11 @@ ENV CI=true
 # Set Python interpreter for `node-gyp` to use
 ENV PYTHON /usr/bin/python
 
-RUN apk --update add bash && apk add libexecinfo libexecinfo-dev && npm i -g npm \
-	&& apk add --no-cache --virtual build-dependencies curl jq py3-configobj py3-pip py3-setuptools python3 python3-dev build-base \
+RUN apk --update add bash && apk upgrade musl && npm i -g npm@11.4.1 \
+	&& apk add --no-cache --virtual build-dependencies bind-tools curl tar xz jq python3 python3-dev py3-configobj py3-pip py3-setuptools build-base \
 	snappy libheif dos2unix gcc g++ snappy-dev git libgcc libstdc++ linux-headers autoconf automake make nasm vips-dev vips
 
-RUN npm install --quiet node-gyp@9.3.1 -g
+RUN npm install --quiet node-gyp@11.2.0 -g
 RUN npm install yarn -g --force
 RUN mkdir /srv/ever-api-starter-kit && chown -R node:node /srv/ever-api-starter-kit
 
@@ -75,7 +75,7 @@ COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --network-timeout 1000000 --frozen-lockfile && yarn cache clean
 
 # development
-FROM node:18-alpine3.16 AS development
+FROM node:20.17.0-alpine3.19 AS development
 
 USER node:node
 
@@ -86,7 +86,7 @@ COPY --chown=node:node --from=dependencies /srv/ever-api-starter-kit .
 COPY . .
 
 # build
-FROM node:18-alpine3.16 AS build
+FROM node:20.17.0-alpine3.19 AS build
 
 WORKDIR /srv/ever-api-starter-kit
 
@@ -103,7 +103,7 @@ ENV IS_DOCKER=true
 RUN yarn build:prod
 
 # production
-FROM node:18-alpine3.16 AS production
+FROM node:20.17.0-alpine3.19 AS production
 
 WORKDIR /srv/ever-api-starter-kit
 
@@ -113,7 +113,8 @@ COPY --chown=node:node --from=dependencies /entrypoint.compose.sh .
 COPY --chown=node:node --from=dependencies /srv/ever-api-starter-kit/node_modules ./node_modules/
 COPY --chown=node:node --from=build /srv/ever-api-starter-kit/dist .
 
-RUN npm install pm2@4.5.1 -g && \
+RUN npm install -g npm@11.4.1 && \
+    npm install pm2@latest -g && \
 	mkdir /import && chown node:node /import && \
 	touch ormlogs.log && chown node:node ormlogs.log && chown node:node wait && \
 	chmod +x wait && chown -R node:node ./
