@@ -2,25 +2,14 @@ kind: Service
 apiVersion: v1
 metadata:
     name: ever-api-starter-kit-prod-api-lb
-    annotations:
-        # See https://github.com/digitalocean/digitalocean-cloud-controller-manager/blob/master/docs/controllers/services/annotations.md
-        service.beta.kubernetes.io/do-loadbalancer-name: 'apistarterkit.ever.dev'
-        service.beta.kubernetes.io/do-loadbalancer-protocol: 'http2'
-        service.beta.kubernetes.io/do-loadbalancer-http2-ports: '443'
-        # Replace with your Certificate Id. You can get a list of Ids with 'doctl compute certificate list'
-        service.beta.kubernetes.io/do-loadbalancer-certificate-id: 'f7269c22-3c4e-4160-8cab-1f7ec00b11b2'
-        service.beta.kubernetes.io/do-loadbalancer-size-slug: 'lb-small'
-        service.beta.kubernetes.io/do-loadbalancer-hostname: 'apistarterkit.ever.dev'
-        service.beta.kubernetes.io/do-loadbalancer-http-idle-timeout-seconds: '600'
-        service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: 'true'
 spec:
-    type: LoadBalancer
+    type: ClusterIP
     selector:
         app: ever-api-starter-kit-prod-api
     ports:
         - name: http
           protocol: TCP
-          port: 443
+          port: 80
           targetPort: 3005
 ---
 apiVersion: apps/v1
@@ -128,29 +117,42 @@ spec:
                       - containerPort: 3005
                         protocol: TCP
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: ever-api-starter-kit-prod-api-ingress
+    annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: apistarterkit.ever.dev
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: ever-api-starter-kit-prod-api-lb
+                            port:
+                                number: 80
+    tls:
+        - hosts:
+              - apistarterkit.ever.dev
+          secretName: apistarterkit.ever.dev-tls
+---
 kind: Service
 apiVersion: v1
 metadata:
     name: ever-api-starter-kit-prod-auth-lb
-    annotations:
-        # See https://github.com/digitalocean/digitalocean-cloud-controller-manager/blob/master/docs/controllers/services/annotations.md
-        service.beta.kubernetes.io/do-loadbalancer-name: 'authstarterkit.ever.dev'
-        service.beta.kubernetes.io/do-loadbalancer-protocol: 'http2'
-        service.beta.kubernetes.io/do-loadbalancer-http2-ports: '443'
-        # Replace with your Certificate Id. You can get a list of Ids with 'doctl compute certificate list'
-        service.beta.kubernetes.io/do-loadbalancer-certificate-id: 'f7269c22-3c4e-4160-8cab-1f7ec00b11b2'
-        service.beta.kubernetes.io/do-loadbalancer-size-slug: 'lb-small'
-        service.beta.kubernetes.io/do-loadbalancer-hostname: 'authstarterkit.ever.dev'
-        service.beta.kubernetes.io/do-loadbalancer-http-idle-timeout-seconds: '60'
-        service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: 'true'
 spec:
-    type: LoadBalancer
+    type: ClusterIP
     selector:
         app: ever-api-starter-kit-prod-auth
     ports:
         - name: http
           protocol: TCP
-          port: 443
+          port: 80
           targetPort: 3567
 ---
 apiVersion: apps/v1
@@ -194,3 +196,27 @@ spec:
                   ports:
                       - containerPort: 3567
                         protocol: TCP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+    name: ever-api-starter-kit-prod-auth-ingress
+    annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: 'true'
+spec:
+    ingressClassName: nginx
+    rules:
+        - host: authstarterkit.ever.dev
+          http:
+              paths:
+                  - path: /
+                    pathType: Prefix
+                    backend:
+                        service:
+                            name: ever-api-starter-kit-prod-auth-lb
+                            port:
+                                number: 80
+    tls:
+        - hosts:
+              - authstarterkit.ever.dev
+          secretName: authstarterkit.ever.dev-tls
