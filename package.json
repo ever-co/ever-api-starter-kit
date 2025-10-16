@@ -1,6 +1,6 @@
 {
 	"name": "ever-api-starter-kit",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Ever API Starter Kit",
 	"private": true,
 	"author": {
@@ -48,7 +48,11 @@
 		"sls:deploy": "yarn sls deploy --verbose",
 		"sls:package": "yarn sls package",
 		"sls:start": "cross-env IS_NOT_SLS= yarn sls offline start",
-		"sls:online": "cross-env IS_NOT_SLS= cross-env IS_DDB_LOCAL= yarn sls offline"
+		"sls:online": "cross-env IS_NOT_SLS= cross-env IS_DDB_LOCAL= yarn sls offline",
+		"migration:create": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:create src/migrations/migration -t",
+        "migration:generate": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:generate src/migrations/migration -d ./src/orm-config.ts",
+        "migration:run": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:run -d ./src/orm-config.ts",
+        "migration:rollback": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:revert -d ./src/orm-config.ts"
 	},
 	"dependencies": {
 		"@godaddy/terminus": "^4.12.1",
@@ -233,8 +237,8 @@
 		"singleQuote": true
 	},
 	"engines": {
-		"node": ">=18.0.0",
-		"yarn": ">=1.13.0"
+		"node": ">=20.0.0",
+        "yarn": ">=1.13.0"
 	},
 	"snyk": true
 }
