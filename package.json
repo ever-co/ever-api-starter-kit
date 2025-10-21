@@ -167,7 +167,7 @@
 		"serverless-plugin-optimize": "^4.2.1-rc.1",
 		"serverless-plugin-typescript": "^2.1.4",
 		"serverless-plugin-warmup": "^8.2.1",
-		"snyk": "^1.996.0",
+		"snyk": "^1.1297.3",
 		"stylelint": "^13.7.2",
 		"supertest": "^6.3.3",
 		"swagger-ui-express": "^4.6.2",
