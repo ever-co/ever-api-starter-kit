@@ -1,7 +1,10 @@
 import { QueryService, InjectQueryService } from '@ptc-org/nestjs-query-core';
-import { CRUDResolver, InjectPubSub } from '@ptc-org/nestjs-query-graphql';
+import {
+	CRUDResolver,
+	InjectPubSub,
+	GraphQLPubSub,
+} from '@ptc-org/nestjs-query-graphql';
 import { Resolver } from '@nestjs/graphql';
-import { PubSub } from 'graphql-subscriptions';
 import { EmployeeDTO } from '../dto/employee.dto';
 import { Employee } from '../employee.entity';
 
@@ -13,7 +16,7 @@ export class EmployeeResolver extends CRUDResolver(EmployeeDTO, {
 }) {
 	constructor(
 		@InjectQueryService(Employee) readonly service: QueryService<Employee>,
-		@InjectPubSub() readonly pubSub: PubSub
+		@InjectPubSub() readonly pubSub: GraphQLPubSub,
 	) {
 		super(service);
 	}
