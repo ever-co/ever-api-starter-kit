@@ -17,7 +17,9 @@ jobs:
                   sudo swapoff -a
                   sudo apt clean
                   docker image ls -aq
-                  docker rmi $(docker image ls -aq)
+                  if [ "$(docker image ls -aq)" ]; then
+                    docker rmi $(docker image ls -aq)
+                  fi
                   find ~/work/_temp -name "cache.tgz" -exec rm -f {} \;
                   sudo rm -rf "/usr/local/share/boost"
                   sudo rm -rf "$AGENT_TOOLSDIRECTORY"
