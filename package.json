@@ -26,7 +26,7 @@
 	},
 	"scripts": {
 		"prebuild": "rimraf dist && rimraf tsconfig.tsbuildinfo && rimraf src/schemas/schema.graphql",
-		"prepare": "husky install",
+		"prepare": "husky",
 		"build": "yarn nest build && yarn generate",
 		"build:prod": "yarn nest build && yarn generate",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -207,12 +207,6 @@
 		"extends": [
 			"@commitlint/config-conventional"
 		]
-	},
-	"husky": {
-		"hooks": {
-			"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-			"pre-commit": "pretty-quick --no-verify --staged"
-		}
 	},
 	"release": {
 		"verifyConditions": [
