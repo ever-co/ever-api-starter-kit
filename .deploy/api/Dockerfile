@@ -44,7 +44,7 @@ ARG PM2_SECRET_KEY
 ARG PM2_MACHINE_NAME
 ARG IS_DISABLE_AUTH
 
-FROM node:20.17.0-alpine3.19 AS dependencies
+FROM node:20.20.0-alpine3.19 AS dependencies
 
 LABEL maintainer="ever@ever.co"
 LABEL org.opencontainers.image.source https://github.com/ever-co/ever-ever-api-starter-kit
@@ -103,7 +103,7 @@ ENV IS_DOCKER=true
 RUN yarn build:prod
 
 # production
-FROM node:20.17.0-alpine3.19 AS production
+FROM node:20.20.0-alpine3.19 AS production
 
 WORKDIR /srv/ever-api-starter-kit
 
