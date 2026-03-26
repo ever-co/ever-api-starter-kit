@@ -244,10 +244,10 @@
   dependencies:
     "@apollographql/graphql-playground-html" "1.6.29"
 
-"@apollo/server@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.npmjs.org/@apollo/server/-/server-5.2.0.tgz#0be9e77e523da58b7ffb4ad21ddf9c5277112d5a"
-  integrity sha512-OEAl5bwVitkvVkmZlgWksSnQ10FUr6q2qJMdkexs83lsvOGmd/y81X5LoETmKZux8UiQsy/A/xzP00b8hTHH/w==
+"@apollo/server@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@apollo/server/-/server-5.5.0.tgz#7918e45af53879b11baea04772fc2968fe64492c"
+  integrity sha512-vWtodBOK/SZwBTJzItECOmLfL8E8pn/IdvP7pnxN5g2tny9iW4+9sxdajE798wV1H2+PYp/rRcl/soSHIBKMPw==
   dependencies:
     "@apollo/cache-control-types" "^1.0.3"
     "@apollo/server-gateway-interface" "^2.0.0"
@@ -261,7 +261,8 @@
     "@apollo/utils.withrequired" "^3.0.0"
     "@graphql-tools/schema" "^10.0.0"
     async-retry "^1.2.1"
-    body-parser "^2.2.0"
+    body-parser "^2.2.2"
+    content-type "^1.0.5"
     cors "^2.8.5"
     finalhandler "^2.1.0"
     loglevel "^1.6.8"
@@ -7226,7 +7227,7 @@ body-parser@^1.19.0:
     type-is "~1.6.18"
     unpipe "~1.0.0"
 
-body-parser@^2.2.0, body-parser@^2.2.1:
+body-parser@^2.2.1, body-parser@^2.2.2:
   version "2.2.2"
   resolved "https://registry.npmjs.org/body-parser/-/body-parser-2.2.2.tgz#1a32cdb966beaf68de50a9dfbe5b58f83cb8890c"
   integrity sha512-oP5VkATKlNwcgvxi0vM0p/D3n2C3EReYVX+DNYs5TjZFn/oQt2j+4sVJtSMr18pdRr8wjTcBl6LoV+FUwzPmNA==
