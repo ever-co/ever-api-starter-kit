@@ -95,7 +95,7 @@
 		"graphql-subscriptions": "^3.0.0",
 		"graphql-tools": "^9.0.26",
 		"html-to-text": "^9.0.5",
-		"lodash": "^4.17.23",
+		"lodash": "^4.18.1",
 		"moment": "^2.30.1",
 		"pg": "^8.17.1",
 		"redis": "^5.10.0",
