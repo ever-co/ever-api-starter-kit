@@ -70,7 +70,7 @@
 		"@nestjs/core": "^11.1.12",
 		"@nestjs/cqrs": "^11.0.3",
 		"@nestjs/graphql": "^13.2.3",
-		"@nestjs/microservices": "^11.1.12",
+		"@nestjs/microservices": "^11.1.19",
 		"@nestjs/platform-express": "^11.1.12",
 		"@nestjs/schedule": "^6.1.0",
 		"@nestjs/swagger": "^11.2.5",
