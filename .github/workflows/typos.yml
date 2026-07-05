@@ -12,7 +12,7 @@ concurrency:
 jobs:
     spellcheck:
         name: Cspell
-        runs-on: ubuntu-latest
+        runs-on: ever-k8s-linux-x64-4
         steps:
             - uses: actions/checkout@v3
             - uses: streetsidesoftware/cspell-action@v2
