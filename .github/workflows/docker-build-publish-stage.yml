@@ -6,12 +6,13 @@ on:
 
 jobs:
     ever-api-starter-kit-api:
-        runs-on: ubuntu-22.04
+        runs-on: ${{ vars.RUNNER_LINUX_X64_4 || 'ubuntu-latest' }}
         steps:
             - name: Checkout
               uses: actions/checkout@v3
 
             - name: Free disk space
+              if: runner.environment == 'github-hosted'
               run: |
                   df -h /
                   sudo swapoff -a
@@ -44,11 +45,13 @@ jobs:
                   password: ${{ secrets.GH_TOKEN }}
 
             - name: Install doctl
+              if: ${{ vars.DO_ENABLED == 'true' }}
               uses: digitalocean/action-doctl@v2
               with:
                   token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
             - name: Log in to DigitalOcean Container Registry with short-lived credentials
+              if: ${{ vars.DO_ENABLED == 'true' }}
               run: doctl registry login --expiry-seconds 3600
 
             - name: Build
@@ -65,6 +68,7 @@ jobs:
                   cache-to: type=inline
 
             - name: Push to DigitalOcean Registry
+              if: ${{ vars.DO_ENABLED == 'true' }}
               run: |
                   docker push registry.digitalocean.com/ever/ever-api-starter-kit-api-stage:latest
             - name: Push to Github Registry

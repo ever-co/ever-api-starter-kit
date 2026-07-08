@@ -9,7 +9,8 @@ on:
 
 jobs:
     deploy-prod:
-        runs-on: ubuntu-22.04
+        runs-on: ${{ vars.RUNNER_LINUX_X64_4 || 'ubuntu-latest' }}
+        if: ${{ vars.DO_ENABLED == 'true' }}
 
         environment: prod
 
