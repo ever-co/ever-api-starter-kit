@@ -45,11 +45,13 @@ jobs:
                   password: ${{ secrets.GH_TOKEN }}
 
             - name: Install doctl
+              if: ${{ vars.DO_ENABLED == 'true' }}
               uses: digitalocean/action-doctl@v2
               with:
                   token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
             - name: Log in to DigitalOcean Container Registry with short-lived credentials
+              if: ${{ vars.DO_ENABLED == 'true' }}
               run: doctl registry login --expiry-seconds 3600
 
             - name: Build
@@ -66,6 +68,7 @@ jobs:
                   cache-to: type=inline
 
             - name: Push to DigitalOcean Registry
+              if: ${{ vars.DO_ENABLED == 'true' }}
               run: |
                   docker push registry.digitalocean.com/ever/ever-api-starter-kit-api:latest
             - name: Push to Github Registry
