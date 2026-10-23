@@ -44,7 +44,7 @@ ARG PM2_SECRET_KEY
 ARG PM2_MACHINE_NAME
 ARG IS_DISABLE_AUTH
 
-FROM node:24-alpine3.23 AS dependencies
+FROM node:26.12.1-alpine3.23 AS dependencies
 
 LABEL maintainer="ever@ever.co"
 LABEL org.opencontainers.image.source https://github.com/ever-co/ever-ever-api-starter-kit
@@ -76,7 +76,7 @@ COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --network-timeout 1000000 --frozen-lockfile && yarn cache clean
 
 # development
-FROM node:24-alpine3.23 AS development
+FROM node:26.12.1-alpine3.23 AS development
 
 USER node:node
 
@@ -87,11 +87,15 @@ COPY --chown=node:node --from=dependencies /srv/ever-api-starter-kit .
 COPY . .
 
 # build
-FROM node:24-alpine3.23 AS build
+FROM node:26.12.1-alpine3.23 AS build
 
 WORKDIR /srv/ever-api-starter-kit
 
 RUN mkdir dist
+
+# node:26 images no longer bundle Yarn (the dependencies stage installs it, but globals do not
+# carry across stages). Install Yarn classic (matches yarn.lock) for `yarn build:prod` below.
+RUN npm install yarn -g --force
 
 COPY --chown=node:node --from=development /srv/ever-api-starter-kit .
 
@@ -104,7 +108,7 @@ ENV IS_DOCKER=true
 RUN yarn build:prod
 
 # production
-FROM node:24-alpine3.23 AS production
+FROM node:26.12.1-alpine3.23 AS production
 
 WORKDIR /srv/ever-api-starter-kit
 
