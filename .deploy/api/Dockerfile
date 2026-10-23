@@ -44,7 +44,7 @@ ARG PM2_SECRET_KEY
 ARG PM2_MACHINE_NAME
 ARG IS_DISABLE_AUTH
 
-FROM node:24-alpine3.23 AS dependencies
+FROM node:26.12.1-alpine3.23 AS dependencies
 
 LABEL maintainer="ever@ever.co"
 LABEL org.opencontainers.image.source https://github.com/ever-co/ever-ever-api-starter-kit
@@ -60,7 +60,7 @@ RUN apk --update add bash && npm i -g npm@9 \
   snappy libheif dos2unix gcc g++ snappy-dev git libgcc libstdc++ linux-headers autoconf automake make nasm vips-dev vips
 
 RUN npm install --quiet node-gyp@11.2.0 -g
-RUN npm install yarn -g --force
+RUN npm install yarn@1.22.22 -g --force
 RUN mkdir /srv/ever-api-starter-kit && chown -R node:node /srv/ever-api-starter-kit
 
 COPY wait .deploy/api/entrypoint.prod.sh .deploy/api/entrypoint.compose.sh /
@@ -76,7 +76,7 @@ COPY --chown=node:node package.json yarn.lock ./
 RUN yarn install --network-timeout 1000000 --frozen-lockfile && yarn cache clean
 
 # development
-FROM node:24-alpine3.23 AS development
+FROM node:26.12.1-alpine3.23 AS development
 
 USER node:node
 
@@ -87,11 +87,15 @@ COPY --chown=node:node --from=dependencies /srv/ever-api-starter-kit .
 COPY . .
 
 # build
-FROM node:24-alpine3.23 AS build
+FROM node:26.12.1-alpine3.23 AS build
 
 WORKDIR /srv/ever-api-starter-kit
 
 RUN mkdir dist
+
+# node:26 images no longer bundle Yarn (the dependencies stage installs it, but globals do not
+# carry across stages). Install Yarn classic (packageManager: yarn@1.22.22) for `yarn build:prod` below.
+RUN npm install yarn@1.22.22 -g --force
 
 COPY --chown=node:node --from=development /srv/ever-api-starter-kit .
 
@@ -104,7 +108,7 @@ ENV IS_DOCKER=true
 RUN yarn build:prod
 
 # production
-FROM node:24-alpine3.23 AS production
+FROM node:26.12.1-alpine3.23 AS production
 
 WORKDIR /srv/ever-api-starter-kit
 
