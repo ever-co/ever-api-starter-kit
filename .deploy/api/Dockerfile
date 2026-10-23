@@ -60,7 +60,7 @@ RUN apk --update add bash && npm i -g npm@9 \
   snappy libheif dos2unix gcc g++ snappy-dev git libgcc libstdc++ linux-headers autoconf automake make nasm vips-dev vips
 
 RUN npm install --quiet node-gyp@11.2.0 -g
-RUN npm install yarn -g --force
+RUN npm install yarn@1.22.22 -g --force
 RUN mkdir /srv/ever-api-starter-kit && chown -R node:node /srv/ever-api-starter-kit
 
 COPY wait .deploy/api/entrypoint.prod.sh .deploy/api/entrypoint.compose.sh /
@@ -94,8 +94,8 @@ WORKDIR /srv/ever-api-starter-kit
 RUN mkdir dist
 
 # node:26 images no longer bundle Yarn (the dependencies stage installs it, but globals do not
-# carry across stages). Install Yarn classic (matches yarn.lock) for `yarn build:prod` below.
-RUN npm install yarn -g --force
+# carry across stages). Install Yarn classic (packageManager: yarn@1.22.22) for `yarn build:prod` below.
+RUN npm install yarn@1.22.22 -g --force
 
 COPY --chown=node:node --from=development /srv/ever-api-starter-kit .
 
