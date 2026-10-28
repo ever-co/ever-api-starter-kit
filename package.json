@@ -55,7 +55,7 @@
 		"migration:rollback": "ts-node -r tsconfig-paths/register --project ./tsconfig.json  ./node_modules/typeorm/cli.js migration:revert -d ./src/orm-config.ts"
 	},
 	"dependencies": {
-		"@apollo/gateway": "^2.12.2",
+		"@apollo/gateway": "^2.12.3",
 		"@apollo/server": "^5.2.0",
 		"@apollo/subgraph": "^2.12.2",
 		"@as-integrations/express5": "^1.1.2",
