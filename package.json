@@ -67,7 +67,7 @@
 		"@nestjs/apollo": "^13.2.3",
 		"@nestjs/common": "^11.1.12",
 		"@nestjs/config": "^4.0.2",
-		"@nestjs/core": "^11.1.12",
+		"@nestjs/core": "^11.1.18",
 		"@nestjs/cqrs": "^11.0.3",
 		"@nestjs/graphql": "^13.2.3",
 		"@nestjs/microservices": "^11.1.12",
